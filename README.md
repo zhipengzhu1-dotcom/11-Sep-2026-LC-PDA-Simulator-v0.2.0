@@ -154,6 +154,13 @@ open-source simulators (with a licence table) are in `docs/research/` —
 start at `docs/research/gradient-elution-math.md` and
 `docs/research/validation-datasets.md`.
 
+## Acknowledgements
+
+This project was built with [Claude Code](https://claude.com/claude-code), using
+skills from Matt Pocock's [skills](https://github.com/mattpocock/skills) repository
+for parts of the engineering workflow (TDD, code review, domain modeling, and
+research).
+
 ## Licence
 
 MIT — see [LICENSE](LICENSE). The science it implements is published theory, cited in `docs/research/`; no code was taken from projects under non-commercial or copyleft terms (the survey in `docs/research/github-hplc-simulators.md` records which those are).
