@@ -85,6 +85,22 @@ Please [open an issue](https://github.com/zhipengzhu1-dotcom/11-Sep-2026-LC-PDA-
 
 The model uses a two-run LSS fit. Temperature is metadata, CSV import and automated peak matching are deferred, and the resolution map is a placeholder for v0.7. Multi-segment retention has limited bench validation; **multi-segment resolution has no validation claim**. See [SPEC.md, §10](SPEC.md) and the [release limitations](docs/releases/v0.2.1.md).
 
+## Roadmap
+
+Planned scope, not delivery dates or implemented features. Authority: [SPEC.md, §11](SPEC.md); full cycle history in [docs/roadmap.md](docs/roadmap.md).
+
+| Cycle | Planned scope |
+|---|---|
+| v0.1.0 | Two scouting runs, LSS fit, linear-gradient prediction, widths, resolution, diagnostics, session save/load — **shipped** |
+| v0.2.0 / v0.2.1 | Independent candidate start/end, ramps and holds, composition diagnostics, programme overlay, session schema 2, geometry fallback for t0 — **shipped** |
+| v0.3 | CSV import, automatic peak matching, ≥2-run regression, isocratic mode |
+| v0.4 | Temperature model |
+| v0.5 | Colleague hosting and sharing |
+| v0.6 | pH model |
+| v0.7 | Resolution map and optimizer over live axes |
+| v0.8 | Column selectivity database and method transfer |
+| v0.9+ | Structure-based prediction |
+
 ## Where things are written down
 
 | File | What it holds |
