@@ -159,7 +159,8 @@ start at `docs/research/gradient-elution-math.md` and
 This project was built with [Claude Code](https://claude.com/claude-code), using
 skills from Matt Pocock's [skills](https://github.com/mattpocock/skills) repository
 for parts of the engineering workflow (TDD, code review, domain modeling, and
-research).
+research). [Codex](https://openai.com/codex/) reviewed the repository ahead of
+publishing.
 
 ## Licence
 
