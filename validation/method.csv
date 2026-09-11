@@ -1,0 +1,19 @@
+field,value,units,notes
+column_length,100,mm,
+column_id,2.1,mm,
+particle_size,1.6,um,
+particle_architecture,core-shell,,"CORTECS is a solid-core (superficially porous) packing — declared, not inferred from the name; selects epsilon_total 0.52 for the geometry t0 (#24)"
+flow,0.4,mL/min,
+temperature,45,C,metadata only in v0.1
+sample_manager_temp,20,C,provenance only
+percentB_start,5,%,phi0 x 100
+percentB_end,95,%,phif x 100
+initial_hold,0.5,min,t_init; 0 if none
+dwell_volume,0.375,mL,"the instrument's own value for this Acquity H-Class; driver's decision 2026-09-02 — use it always. The engine wants a time: t_D = V_D / F, derived at entry (app/pipeline.py dwell_from_volume), never stored here."
+t0,0.525,min,driver-read 2026-08-31 from run1-chromatogram.png (solvent front); supersedes the 0.6 first entered (wrong time point). Fixtures re-baselined to 0.525 on 2026-09-03 (#24)
+t0_marker,solvent front,,no marker compound injected; first baseline disturbance of the injection. A uracil confirmation would make it audit-grade (campaign #27)
+injection_volume,10,uL,keep constant across runs
+sample_diluent,50:50 water:ACN,,consider diluting 1:1 with water or 2-3 uL injection; keep identical across runs
+instrument,Waters UPLC Acquity H-Class,,make/model
+column_name,Waters CORTECS UPLC Shield RP18,,vendor + phase
+sample,,,mixture identity

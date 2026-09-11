@@ -1,0 +1,67 @@
+[project]
+name = "hplcsim"
+version = "0.2.1"
+description = "HPLC gradient method simulator: two-run LSS fit and prediction for working chromatographers"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+dependencies = ["numpy>=1.26", "scipy>=1.11"]
+
+[project.optional-dependencies]
+# The app layer uses the width="stretch" element API, which lands in streamlit 1.49.
+app = ["streamlit>=1.49", "pandas>=2.0", "plotly>=5.20"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "scipy-stubs>=1.18.1.0",
+    "pandas-stubs>=3.0.5.260730",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hplcsim"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests", "."]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+# Strict on the engine (CLAUDE.md) and on the app's whole logic layer. Only the
+# root streamlit_app.py entry point is excluded, and only because Streamlit widget calls
+# would cost a type: ignore apiece. Nothing governed by a documented rule is allowed to
+# hide there: SPEC §4's two entry conversions (%B → φ, V_D ÷ F) live in app.entry, and
+# every `st.session_state` touch in app.screen_state (CLAUDE.md's session-state rule).
+# One `files` list rather than `packages` plus `files`: mypy accepts only one of the two,
+# and `scripts/` is a directory rather than an importable package.
+# `scripts/` is checked too. It holds the browser measurements that `AppTest` cannot make
+# (#79), which is exactly the code no other gate can see — the first version of that
+# script called `measure(page, "max")` against a `float | None` parameter and nothing
+# said a word. A directory outside every gate is where the next one hides.
+files = ["src/hplcsim", "app", "scripts"]
+mypy_path = ["src", "."]
+exclude = "^streamlit_app\\.py$"
+
+[[tool.mypy.overrides]]
+# plotly ships no type information; pandas' and streamlit's are followed normally.
+# Playwright is not a project dependency at all — the browser check runs under
+# `uv run --with playwright`, so its stubs are absent from the ordinary environment.
+module = ["plotly.*", "playwright.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# `app` is not an installed package (only src/hplcsim is), so the repo root goes on the
+# path for the tests that exercise the Cockpit's logic layer.
+pythonpath = ["."]

@@ -1,0 +1,45 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with:
+          version: "0.12.12"
+          python-version: "3.12"
+      - name: Install locked app and development dependencies
+        run: uv sync --locked --extra app
+      - name: Test
+        run: uv run --locked --extra app pytest
+      - name: Lint
+        run: uv run --locked --extra app ruff check
+      - name: Check formatting
+        run: uv run --locked --extra app ruff format --check
+      - name: Check types
+        run: uv run --locked --extra app mypy
+      - name: Install Chromium for the browser check
+        run: uv run --with playwright==1.62.0 playwright install --with-deps chromium
+      - name: Verify pinned rows in Chromium
+        run: |
+          uv run --locked --extra app streamlit run streamlit_app.py --server.headless true --server.port 8767 > /tmp/hplcsim-server.log 2>&1 &
+          app_pid=$!
+          trap 'kill "$app_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://localhost:8767/_stcore/health; then
+              break
+            fi
+            sleep 1
+          done
+          uv run --with playwright==1.62.0 python scripts/check_sticky_rows.py --port 8767
