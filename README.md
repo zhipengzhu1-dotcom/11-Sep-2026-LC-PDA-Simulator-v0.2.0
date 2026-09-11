@@ -98,6 +98,46 @@ The model uses a two-run LSS fit. Temperature is metadata, CSV import and automa
 | [docs/running-the-app.md](docs/running-the-app.md) | How to start, open, and stop the app |
 | `validation/` | Real instrument data and the protocol that produced it |
 
+## References
+
+The retention model and its calibration are built from published theory, not from any
+other simulator's code. Each paper below is cited at the point it is used in
+`docs/research/`, with the specific equation or figure; this list is the consolidated
+bibliography.
+
+- den Uijl, M.J. et al. (2021). "Gradient elution retention modeling: revising the
+  linear solvent strength paradigm." *J. Chromatogr. A* 1636, 461780.
+- den Uijl, M.J. et al. (2021). "Correcting errors in gradient elution retention
+  modelling." *J. Sep. Sci.* 44, 88–114. (PMC7821232)
+- Guillarme, D. et al. (2022). "The Linear Solvent Strength model and beyond: a
+  practical guide." *J. Sep. Sci.* 45, 3276–3285. (PMC9543774) — the load-bearing
+  source for the closed-form retention-time expression and its constraints.
+- Neue, U.D. & Kuss, H.-J. (2010). "Improved reversed-phase gradient retention
+  modeling." *J. Chromatogr. A* 1217, 3794–3803.
+- Molnár, I. (2002). "Computerized design of separation strategies by
+  reversed-phase liquid chromatography." *J. Chromatogr. A* 965, 175–194.
+- Quarry, M.A., Grob, R.L. & Snyder, L.R. (1986). "Prediction of precise
+  isocratic retention data from two or more gradient elution runs." *Anal.
+  Chem.* 58, 907–917. — the two-scouting-run fit this simulator uses.
+- Poole, C.F. & Atapattu, S.N. (2022). "Comparison of theoretical and empirical
+  van Deemter equations..." *J. Chromatogr. A* 1675, 463153.
+- Jandera, P. & Hájek, T. — column porosity across 18 columns, used for the
+  dead-time-from-geometry estimate; see `docs/research/porosity-for-t0-geometry.md`
+  for the full citation and table.
+- Dolan, J.W. — dwell-volume and porosity rules of thumb; see
+  `docs/research/porosity-for-t0-geometry.md`.
+- Rutan, S.C., Cash, M. & Stoll, D.R. (2023). "Two-dimensional separations
+  fidelity..." *J. Chromatogr. A* 1711, 464443. (abstract only)
+- Nikitas, P. & Pappa-Louisi, A. (2009). *J. Chromatogr. A* 1216, 1737–1755.
+  (abstract only)
+- Baeza-Baeza, J.J. et al. (2013). *J. Chromatogr. A* 1284, 28–35. (abstract
+  only)
+
+Validation data, N and porosity references, and the full survey of adjacent
+open-source simulators (with a licence table) are in `docs/research/` —
+start at `docs/research/gradient-elution-math.md` and
+`docs/research/validation-datasets.md`.
+
 ## Licence
 
 MIT — see [LICENSE](LICENSE). The science it implements is published theory, cited in `docs/research/`; no code was taken from projects under non-commercial or copyleft terms (the survey in `docs/research/github-hplc-simulators.md` records which those are).
