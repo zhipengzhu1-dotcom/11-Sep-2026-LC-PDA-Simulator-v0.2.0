@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "app_version": "0.2.1",
+  "session_name": "Three-peak lab example",
+  "method": {
+    "column_length_mm": 100.0,
+    "column_id_mm": 2.1,
+    "particle_um": 1.6,
+    "flow_ml_min": 0.4,
+    "temperature_c": 45.0,
+    "t0_min": 0.525,
+    "t0_source": "measured",
+    "t0_marker": "Solvent front: first baseline disturbance; no marker compound injected.",
+    "particle_architecture": "core_shell",
+    "dwell_min": 0.9375,
+    "pct_b_start": 5.0,
+    "pct_b_end": 95.0,
+    "hold_min": 0.5
+  },
+  "runs": [
+    {
+      "tg_min": 15.0,
+      "name": "tG15"
+    },
+    {
+      "tg_min": 45.0,
+      "name": "tG45"
+    }
+  ],
+  "peaks": [
+    {
+      "name": "Unknown-1",
+      "tr_run1_min": 9.855,
+      "tr_run2_min": 20.831,
+      "area_run1": 13352.0,
+      "area_run2": 14299.0,
+      "w_half_run1_min": 0.033,
+      "w_half_run2_min": 0.087
+    },
+    {
+      "name": "Unknown-2",
+      "tr_run1_min": 11.592,
+      "tr_run2_min": 25.932,
+      "area_run1": 4829.0,
+      "area_run2": 9437.0,
+      "w_half_run1_min": 0.034,
+      "w_half_run2_min": 0.093
+    },
+    {
+      "name": "Unknown-3",
+      "tr_run1_min": 16.159,
+      "tr_run2_min": 39.796,
+      "area_run1": 4013.0,
+      "area_run2": 7057.0,
+      "w_half_run1_min": 0.025,
+      "w_half_run2_min": 0.071
+    }
+  ],
+  "candidate": {
+    "pct_b_start": 5.0,
+    "hold_min": 0.5,
+    "segments": [
+      {
+        "tg_min": 25.0,
+        "pct_b_end": 95.0
+      }
+    ]
+  }
+}
